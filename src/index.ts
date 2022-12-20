@@ -5,6 +5,7 @@ import Path from "path";
 const registeredCommit = [
   "8c8f9b4b651530894a35fba0999e08b8822f318e",
   "f3b841f4f870a84ce2318a739561c88b1ea9d0ab",
+  "1381377e917f5248e5fa8a1426fe5449783094d3",
 ];
 
 const getYarnLock = async () => {
