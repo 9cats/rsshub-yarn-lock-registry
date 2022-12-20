@@ -13,14 +13,10 @@ const getYarnLock = async () => {
   registeredCommit.map(async (commitSHA) => {
     // await fs.
     const writer = createWriteStream(`registry/${commitSHA}.yarn.lock`);
+    const writer2 = createWriteStream(`registry/${commitSHA}.package.json`);
 
-    const path = Path.resolve(
-      __dirname,
-      "..",
-      "registry",
-      `${commitSHA}.yarn.lock`
-    );
     const url = `https://raw.githubusercontent.com/DIYgod/RSSHub/${commitSHA}/yarn.lock`;
+    const url2 = `https://raw.githubusercontent.com/DIYgod/RSSHub/${commitSHA}/package.json`;
 
     const response = await Axios({
       url,
@@ -28,12 +24,23 @@ const getYarnLock = async () => {
       responseType: "stream",
     });
 
+    const response2 = await Axios({
+      url: url2,
+      method: "GET",
+      responseType: "stream",
+    });
+
     response.data.pipe(writer);
+    response2.data.pipe(writer2);
 
     await new Promise((resolve, reject) => {
       writer.on("finish", resolve);
-      // writer.on("error", reject);
       writer.on("error", reject);
+    });
+
+    await new Promise((resolve, reject) => {
+      writer2.on("finish", resolve);
+      writer2.on("error", reject);
     });
   });
 };
