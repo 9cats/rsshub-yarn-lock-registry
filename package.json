@@ -1,0 +1,16 @@
+{
+  "name": "rsshub-yarn-lock-registry",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node lib/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "axios": "^1.2.1",
+    "typescript": "^4.9.4",
+    "vercel": "^28.9.0"
+  }
+}
