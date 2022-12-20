@@ -1,4 +1,4 @@
-name: Vercel
+name: Deploy
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         run: yarn start
 
       - name: Export Env
-        run: mkdir registry/.vercel && echo "{\"orgId\":\"${{ secrets.VERCEL_ORGID }}\",\"projectId\":\"${{ secrets.VERCEL_PROJECTID }}\"}" > deploy/.vercel/project.json
+        run: mkdir registry/.vercel && echo "{\"orgId\":\"${{ secrets.VERCEL_ORGID }}\",\"projectId\":\"${{ secrets.VERCEL_PROJECTID }}\"}" > registry/.vercel/project.json
 
       - name: Deploy Vercel
         run: npx vercel deploy registry --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
